@@ -28,7 +28,7 @@ export default function Footer() {
         />
         <Text>NextJs + Auth </Text>
         <Text></Text>
-        <Link href="https://github.com/notageek-guy/resume-maker">
+        <Link href="https://github.com/notageek-guy/resumee">
           <FaGithub size={20} />
         </Link>
       </Box>
