@@ -1,17 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import { Box, Button, Image } from "@chakra-ui/react";
-import { useSession, signIn } from "next-auth/react";
 import { Fragment } from "react";
-
 export default function Login() {
-  const { data: session } = useSession();
-  const handleGithubLogin = (e) => {
-    e.preventDefault();
-    signIn("github", {
-      callbackUrl: "http://localhost:3000/home",
-      redirect: false,
-    });
-  };
   return (
     <Fragment>
       <Box
@@ -35,17 +25,16 @@ export default function Login() {
             marginBottom="20px"
           />
 
-          {!session && <Signin handleGithubLogin={handleGithubLogin} />}
+          <Button
+            leftIcon={<FaGithub />}
+            onClick={() => {
+              window.location.href = "/home";
+            }}
+          >
+            Login with Github
+          </Button>
         </Box>
       </Box>
     </Fragment>
   );
 }
-
-const Signin = ({ handleGithubLogin }) => {
-  return (
-    <Button leftIcon={<FaGithub />} onClick={handleGithubLogin}>
-      Login with Github
-    </Button>
-  );
-};

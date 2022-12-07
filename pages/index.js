@@ -1,25 +1,13 @@
-import { getSession, useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { useToggle } from "../context/toggleProvider";
 export default function Main() {
-  const { data: session } = useSession();
-  // if logged in redirect to home page
+  const { toggle} = useToggle();
   useEffect(() => {
-    if (session) window.location.replace("/home");
-  }, [session]);
-}
-
-// if not logged in, redirect to login page
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { session },
-  };
+   if(toggle){
+    window.location.href = "/home";
+   }
+   else {
+    window.location.href = "/login";
+   }
+  }, [toggle]);
 }
