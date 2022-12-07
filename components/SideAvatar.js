@@ -1,12 +1,11 @@
-import React from "react";
+import { AvatarGenerator } from "random-avatar-generator";
 import { Avatar, Box } from "@chakra-ui/react";
-import { useSession } from "next-auth/react";
-export default function SideAvatar({ name, image }) {
-  const { data: session } = useSession();
-  if (!session) return null;
+export default function SideAvatar() {
+  const generator = new AvatarGenerator();
+
   return (
     <Box display="flex" alignItems="center" justifyContent="center">
-      <Avatar name={session.user.name} src={session.user.image} />
+      <Avatar src={generator.generateRandomAvatar("avatar")} />
     </Box>
   );
 }
